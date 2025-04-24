@@ -8,9 +8,9 @@ import Footer from "./layout/Footer";
 
 function Layout() {
     return (
-        <div>
+        <div className="flex flex-col h-screen justify-between">
             <Navbar />
-            <main>
+            <main className="mb-auto w-10/12 max-w-4xl mx-auto">
                 <Outlet />
             </main>
             <Footer />
