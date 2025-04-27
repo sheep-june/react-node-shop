@@ -29,6 +29,8 @@ app.post("/", (req, res) => {
     res.json(req.body);
 });
 
+app.use('/users',require('./routes/users'));
+
 app.use("/users", require("./routes/users"));
 //app.use('/products', require('./routes/products'));
 

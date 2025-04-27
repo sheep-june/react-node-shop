@@ -4,10 +4,12 @@ import {useDispatch} from 'react-redux'
 import { registerUser } from "../../store/thunkFunctions";
 
 const RegisterPage = () => {
-const {register, 
-    handleSubmit, 
-    formState: {errors}, 
-    reset} = useForm({ mode:'onChange'})
+    const {
+        register, 
+        handleSubmit, 
+        formState: {errors}, 
+        reset
+    } = useForm({ mode:'onChange'})
     const dispatch = useDispatch();
 
     const onSubmit = ({email,password,name}) =>{
