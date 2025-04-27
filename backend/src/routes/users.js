@@ -4,7 +4,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const { auth } = require('../middleware/auth');
 
-router.post("/auth", auth,async (req, res) => {
+router.get("/auth", auth,async (req, res) => {
     return res.status(200).json({
         id:req.user.id,
         email:req.user.email,

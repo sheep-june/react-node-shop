@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 let auth = async(req,resizeBy,next)=>{
-    const authHeader = req.headers['authorizaion'];
+    const authHeader = req.headers['authorization'];
 
     const token = authHeader && authHeader.split(' ')[1];
     if(token === null) return resizeBy.sendStatus(401);

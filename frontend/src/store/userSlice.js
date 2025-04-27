@@ -38,7 +38,8 @@ const userSlice = createSlice({
             })
             .addCase(loginUser.fulfilled, (state, action)=>{
                 state.isLoading=false;
-                state.userData = action.payload;
+//                state.userData = action.payload;
+                state.userData = action.payload.user;
                 state.isAuth = true;
                 localStorage.setItem('accessToken',action.payload.accessToken);
             })
