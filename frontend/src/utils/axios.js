@@ -13,4 +13,13 @@ axiosInstance.interceptors.request.use(function(config){
     }
 )
 
+axiosInstance.interceptors.response.use((response)=>{
+    return response
+}, async function(error){
+    if(error.response.data === 'jwt expired'){
+        window.location.reload();
+    }
+    return Promise.reject(error);
+})
+
 export default axiosInstance;
