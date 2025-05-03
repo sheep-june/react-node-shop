@@ -1,10 +1,13 @@
 const express = require('express');
 const User = require('../models/User');
+const Product = require('../models/Product');
+const Payment = require('../models/Payment');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-const { auth } = require('../middleware/auth');
+const auth = require('../middleware/auth');
+const async = require('async');
 
-router.get("/auth", auth,async (req, res) => {
+router.get("/auth", auth, async (req, res) => {
     return res.status(200).json({
         id:req.user.id,
         email:req.user.email,

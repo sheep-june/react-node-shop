@@ -55,6 +55,12 @@ function App() {
             <Route path="/" element={<Layout />}>
                 <Route index element={<LandingPage />} />
 
+                {/* 로그인한 사람은 갈 수 없음 */}
+                <Route element={<NotAuthRoutes isAuth={isAuth}/>}>
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/register" element={<RegisterPage />} />
+                </Route>
+
                 {/* 로그인한 사람만  */}
                 <Route element={<ProtectedRoutes isAuth={isAuth}/>}>
                     <Route path="/protected" element={<ProtectedPage />} />
@@ -63,13 +69,7 @@ function App() {
                     <Route path="/user/cart" element={<CartPage />} />
                     <Route path="/history" element={<HistoryPage />} />
                 </Route>
-
-                {/* 로그인한 사람은 갈 수 없음 */}
-                <Route element={<NotAuthRoutes isAuth={isAuth}/>}>
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/register" element={<RegisterPage />} />
-                </Route>
-
+                
             </Route>
         </Routes>
     );

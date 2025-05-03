@@ -3,7 +3,7 @@ import { Navigate, Outlet } from 'react-router-dom'
 
 const NotAuthRoutes = ({isAuth}) => {
     return (
-        isAuth ? <Navigate to={'/'} /> : <Outlet/>
+        isAuth ? <Navigate to={'/'} /> : <Outlet />
     )
 }
 
