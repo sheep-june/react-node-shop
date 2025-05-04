@@ -52,7 +52,7 @@ router.post("/login",async (req, res, next) => {
     }
 });
 
-router.get("/logout",auth ,async (req, res, next) => {
+router.post("/logout",auth ,async (req, res, next) => {
     try{
         return res.sendStatus(200);
     } catch(error){

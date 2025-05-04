@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import axiosInstance from '../../utils/axios';
 import { useNavigate } from 'react-router-dom';
-//import FileUpload from '../../components/FileUpload';
+import FileUpload from '../../components/FileUpload';
 
 const continents = [
   { key: 1, value: 'Africa' },
@@ -70,7 +70,7 @@ const UploadProductPage = () => {
 
       <form className='mt-6' onSubmit={handleSubmit}>
 
-        {/* <FileUpload images={product.images} onImageChange={handleImages} /> */}
+        <FileUpload images={product.images} onImageChange={handleImages} />
 
         <div className='mt-4'>
           <label htmlFor='title'>이름</label>
