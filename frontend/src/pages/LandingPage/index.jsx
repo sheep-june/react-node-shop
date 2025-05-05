@@ -1,61 +1,65 @@
-import React, { useEffect, useState } from 'react'
-import CheckBox from './Sections/CheckBox'
-import RadioBox from './Sections/RadioBox'
-import SearchInput from './Sections/SearchInput'
-import CardItem from './Sections/CardItem'
-import axiosInstance from '../../utils/axios';
-import { continents, prices } from '../../utils/filterData'
-
+import React, { useEffect, useState } from "react";
+import CheckBox from "./Sections/CheckBox";
+import RadioBox from "./Sections/RadioBox";
+import SearchInput from "./Sections/SearchInput";
+import CardItem from "./Sections/CardItem";
+import axiosInstance from "../../utils/axios";
+import { continents, prices } from "../../utils/filterData";
 
 const LandingPage = () => {
     const limit = 4;
-  const [searchTerm, setSearchTerm] = useState('');
-  const [products, setProducts] = useState([]);
-  const [skip, setSkip] = useState(0);
-  const [hasMore, setHasMore] = useState(false);
-  const [filters, setFilters] = useState({
-    continents: [],
-    price: []
-  })
+    const [searchTerm, setSearchTerm] = useState("");
+    const [products, setProducts] = useState([]);
+    const [skip, setSkip] = useState(0);
+    const [hasMore, setHasMore] = useState(false);
+    const [filters, setFilters] = useState({
+        continents: [],
+        price: [],
+    });
 
-  useEffect(() => {
-    fetchProducts({ skip, limit });
-  }, [])
+    useEffect(() => {
+        fetchProducts({ skip, limit });
+    }, []);
 
-  const fetchProducts = async ({ skip, limit, loadMore = false, filters = {}, searchTerm = "" }) => {
-    const params = {
-      skip,
-      limit,
-      filters,
-      searchTerm
-    }
+    const fetchProducts = async ({
+        skip,
+        limit,
+        loadMore = false,
+        filters = {},
+        searchTerm = "",
+    }) => {
+        const params = {
+            skip,
+            limit,
+            filters,
+            searchTerm,
+        };
 
+        try {
+            const response = await axiosInstance.get("/products", { params });
 
-    try {
-      const response = await axiosInstance.get('/products', { params })
+            if (loadMore) {
+                setProducts([...products, ...response.data.products]);
+            } else {
+                setProducts(response.data.products);
+            }
+            setHasMore(response.data.hasMore);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
-      if (loadMore) {
-        setProducts([...products, ...response.data.products])
-      } else {
-        setProducts(response.data.products);
-      }
-      setHasMore(response.data.hasMore);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  const handleLoadMore = () => {
-    const body = {
-      skip: skip + limit,
-      limit,
-      loadMore: true,
-      filters,
-      searchTerm
-    }
-    fetchProducts(body);
-    setSkip(skip + limit)
-  }
+    const handleLoadMore = () => {
+        const body = {
+            skip: skip + limit,
+            limit,
+            loadMore: true,
+            filters,
+            searchTerm,
+        };
+        fetchProducts(body);
+        setSkip(skip + limit);
+    };
 
     const handleFilters = (newFilteredData, category) => {
         const newFilters = { ...filters };
@@ -131,8 +135,8 @@ const LandingPage = () => {
             {/* Search */}
             <div className="flex justify-end mb-3">
                 <SearchInput
-                    // searchTerm={searchTerm}
-                    // onSearch={handleSearchTerm}
+                    searchTerm={searchTerm}
+                    onSearch={handleSearchTerm}
                 />
             </div>
 
