@@ -1,63 +1,61 @@
-import React, { useEffect, useState } from "react";
-import axiosInstance from "../../utils/axios";
-import CheckBox from "./Sections/CheckBox";
-import RadioBox from "./Sections/RadioBox";
-import SearchInput from "./Sections/SearchInput";
-import CardItem from "./Sections/CardItem";
+import React, { useEffect, useState } from 'react'
+import CheckBox from './Sections/CheckBox'
+import RadioBox from './Sections/RadioBox'
+import SearchInput from './Sections/SearchInput'
+import CardItem from './Sections/CardItem'
+import axiosInstance from '../../utils/axios';
+import { continents, prices } from '../../utils/filterData'
+
 
 const LandingPage = () => {
     const limit = 4;
-    const [searchTerm, setSearchTerm] = useState("");
-    const [products, setProducts] = useState([]);
-    const [skip, setSkip] = useState(0);
-    const [hasMore, setHasMore] = useState(false);
-    const [filters, setFilters] = useState({
-        continents: [],
-        price: [],
-    });
+  const [searchTerm, setSearchTerm] = useState('');
+  const [products, setProducts] = useState([]);
+  const [skip, setSkip] = useState(0);
+  const [hasMore, setHasMore] = useState(false);
+  const [filters, setFilters] = useState({
+    continents: [],
+    price: []
+  })
 
-    useEffect(() => {
-        fetchProducts({ skip, limit });
-    }, []);
+  useEffect(() => {
+    fetchProducts({ skip, limit });
+  }, [])
 
-    const fetchProducts = async ({
-        skip,
-        limit,
-        loadMore = false,
-        filters = {},
-        searchTerm = "",
-    }) => {
-        const params = {
-            skip,
-            limit,
-            filters,
-            searchTerm,
-        };
-        try {
-            const response = await axiosInstance.get("/products", { params });
+  const fetchProducts = async ({ skip, limit, loadMore = false, filters = {}, searchTerm = "" }) => {
+    const params = {
+      skip,
+      limit,
+      filters,
+      searchTerm
+    }
 
-            if (loadMore) {
-                setProducts([...products, ...response.data.products]);
-            } else {
-                setProducts(response.data.products);
-            }
-            setHasMore(response.data.hasMore);
-        } catch (error) {
-            console.error(error);
-        }
-    };
 
-    const handleLoadMore = () => {
-        const body = {
-            skip: skip + limit,
-            limit,
-            loadMore: true,
-            filters,
-            searchTerm,
-        };
-        fetchProducts(body);
-        setSkip(skip + limit);
-    };
+    try {
+      const response = await axiosInstance.get('/products', { params })
+
+      if (loadMore) {
+        setProducts([...products, ...response.data.products])
+      } else {
+        setProducts(response.data.products);
+      }
+      setHasMore(response.data.hasMore);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const handleLoadMore = () => {
+    const body = {
+      skip: skip + limit,
+      limit,
+      loadMore: true,
+      filters,
+      searchTerm
+    }
+    fetchProducts(body);
+    setSkip(skip + limit)
+  }
 
     const handleFilters = (newFilteredData, category) => {
         const newFilters = { ...filters };
@@ -72,11 +70,11 @@ const LandingPage = () => {
 
     const handlePrice = (value) => {
         let array = [];
-        // for (let key in prices) {
-        //     if (prices[key]._id === parseInt(value, 10)) {
-        //         array = prices[key].array;
-        //     }
-        // }
+        for (let key in prices) {
+            if (prices[key]._id === parseInt(value, 10)) {
+                array = prices[key].array;
+            }
+        }
         return array;
     };
 
@@ -114,18 +112,18 @@ const LandingPage = () => {
             <div className="flex gap-3">
                 <div className="w-1/2">
                     <CheckBox
-                        // continents={continents}
-                        // checkedContinents={filters.continents}
-                        // onFilters={(filters) =>
-                        //     handleFilters(filters, "continents")
-                        // }
+                        continents={continents}
+                        checkedContinents={filters.continents}
+                        onFilters={(filters) =>
+                            handleFilters(filters, "continents")
+                        }
                     />
                 </div>
                 <div className="w-1/2">
                     <RadioBox
-                        // prices={prices}
-                        // checkedPrice={filters.price}
-                        // onFilters={(filters) => handleFilters(filters, "price")}
+                        prices={prices}
+                        checkedPrice={filters.price}
+                        onFilters={(filters) => handleFilters(filters, "price")}
                     />
                 </div>
             </div>
