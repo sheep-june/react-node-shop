@@ -51,6 +51,8 @@ router.get("/:id", async (req, res, next) => {
     }
 });
 
+
+
 router.get("/", async (req, res, next) => {
     const parsed = qs.parse(req._parsedUrl.query);
     //   console.log("전체 쿼리:", req.query);        // 여기에 filters 나와야 함
@@ -77,9 +79,18 @@ router.get("/", async (req, res, next) => {
         }
     }
 
+    // if (term) {
+    //     findArgs["$text"] = { $search: term };
+    // }
+    //테스트 중에 테스 만 검색해도 나옴
+    //실무에서는 다른 방법을 사용중이니 공부하는걸로
+    //밑에 $regex방법은 대규모데이터에서는 성능이 느려짐
+    //MongoDB Atlas Search 이것도 있지만
+    //직접 N-gram 인덱싱 ////Elasticsearch
     if (term) {
-        findArgs["$text"] = { $search: term };
+        findArgs["title"] = { $regex: term, $options: "i" }; // i는 대소문자 구분 안 함
     }
+    
 
     //console.log(findArgs);
 
