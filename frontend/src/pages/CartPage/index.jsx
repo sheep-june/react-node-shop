@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getCartItems } from '../../store/thunkFunctions';
+import { getCartItems, removeCartItem } from '../../store/thunkFunctions';
+import CartTable from './Sections/CartTable';
 // import { CartTable } from './Sections/CartTable';
 
 const CartPage = () => {
@@ -37,13 +38,13 @@ const CartPage = () => {
     setTotal(total);
   }
 
-  // const handleRemoveCartItem = (productId) => {
-  //   dispatch(removeCartItem(productId));
-  // }
+  const handleRemoveCartItem = (productId) => {
+    dispatch(removeCartItem(productId));
+  }
 
-  // const handlePaymentClick = () => {
-  //   dispatch(payProducts({ cartDetail }))
-  // }
+  const handlePaymentClick = () => {
+    dispatch(payProducts({ cartDetail }))
+  }
 
   return (
     <section>
@@ -54,12 +55,12 @@ const CartPage = () => {
       {cartDetail?.length > 0 ?
         <>
 
-          {/* <CartTable products={cartDetail} onRemoveItem={handleRemoveCartItem} /> */}
+          <CartTable products={cartDetail} onRemoveItem={handleRemoveCartItem} />
           <div className='mt-10'>
             <p><span className='font-bold'>합계:</span>{total} 원</p>
             <button
-              // className='px-4 py-2 mt-5 text-white bg-black rounded-md hover:bg-gray-500'
-              // onClick={handlePaymentClick}
+              className='px-4 py-2 mt-5 text-white bg-black rounded-md hover:bg-gray-500'
+              onClick={handlePaymentClick}
             >
               결제하기
             </button>

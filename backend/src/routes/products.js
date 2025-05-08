@@ -87,6 +87,7 @@ router.get("/", async (req, res, next) => {
     //밑에 $regex방법은 대규모데이터에서는 성능이 느려짐
     //MongoDB Atlas Search 이것도 있지만
     //직접 N-gram 인덱싱 ////Elasticsearch
+    //일본어는 형태소 단위로 쪼개서 
     if (term) {
         findArgs["title"] = { $regex: term, $options: "i" }; // i는 대소문자 구분 안 함
     }

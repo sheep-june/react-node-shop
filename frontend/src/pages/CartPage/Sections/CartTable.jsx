@@ -7,7 +7,7 @@ const CartTable = ({ products, onRemoveItem }) => {
         if(images.length> 0) {
             let image = images[0]
             return `${import.meta.env.VITE_SERVER_URL}/${image}`
-        } 
+        }
     }
 
 
