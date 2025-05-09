@@ -5,6 +5,7 @@ import {
     getCartItems,
     loginUser,
     logoutUser,
+    payProducts,
     // payProducts,
     registerUser,
     removeCartItem,
@@ -130,7 +131,22 @@ const userSlice = createSlice({
                 state.isLoading = false;
                 state.error = action.payload;
                 toast.error(action.payload);
-            });
+            })
+
+            .addCase(payProducts.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(payProducts.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.cartDetail = [];
+                state.userData.cart = [];
+                toast.info('성공적으로 상품을 구매했습니다.');
+            })
+            .addCase(payProducts.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
+                toast.error(action.payload);
+            })
 
     },
 });

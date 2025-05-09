@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getCartItems, removeCartItem } from '../../store/thunkFunctions';
+import { getCartItems, payProducts, removeCartItem } from '../../store/thunkFunctions';
 import CartTable from './Sections/CartTable';
 // import { CartTable } from './Sections/CartTable';
 
