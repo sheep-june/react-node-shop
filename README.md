@@ -1,4 +1,4 @@
-# Shopping Mall - 商品購入サイト（Node.js + React）
+# Shopping Mall - 旅行商品購入サイト（Node.js + React）
 
 ## 概要  
 本プロジェクトは、Node.js（Express）と React をベースに作成されたショッピングサイトです。  
@@ -71,7 +71,7 @@ project
 
 ---
 
-# Shopping Mall - 상품 구매 사이트 (Node.js + React)
+# Shopping Mall - 여행 상품 구매 사이트 (Node.js + React)
 
 ## 개요  
 이 프로젝트는 Node.js(Express)와 React를 기반으로 한 쇼핑몰 웹 애플리케이션입니다.  
