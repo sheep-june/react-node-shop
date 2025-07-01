@@ -1,4 +1,4 @@
-# Shopping Mall - 旅行商品購入サイト（Node.js + React）
+# 旅行情報サイト（Node.js + React）
 
 ## 概要  
 本プロジェクトは、Node.js（Express）と React をベースに作成されたショッピングサイトです。  
