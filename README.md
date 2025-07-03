@@ -71,7 +71,7 @@ project
 
 ---
 
-# Shopping Mall - 여행 상품 구매 사이트 (Node.js + React)
+# 여행 정보 사이트 (Node.js + React)
 
 ## 개요  
 이 프로젝트는 Node.js(Express)와 React를 기반으로 한 쇼핑몰 웹 애플리케이션입니다.  
